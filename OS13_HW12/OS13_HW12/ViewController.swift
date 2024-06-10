@@ -8,6 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var isWorkTime = true
+    var isStarted = false
+    var timer: Timer?
+    let workTime = 25
+    let restTime = 5
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

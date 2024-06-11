@@ -43,8 +43,10 @@ final class ViewController: UIViewController, CAAnimationDelegate {
     private var startPauseButton: UIButton = {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(startPausePressed), for: .touchUpInside)
-        button.setImage(getImage("play"), for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 36, weight: .medium)
+        button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
+        button.tintColor = .systemBlue
         return button
     }()
     
@@ -63,34 +65,7 @@ final class ViewController: UIViewController, CAAnimationDelegate {
         setupStackView()
         setupHierarchy()
         setupLayout()
+        updateUI()
     }
     
-    private func setupStackView() {
-        stackView.addArrangedSubview(modeLabel)
-        stackView.addArrangedSubview(timerLabel)
-        stackView.addArrangedSubview(startPauseButton)
-    }
     
-    private func setupHierarchy() {
-        view.addSubviews(stackView)
-    }
-    
-    private func setupLayout() {
-        stackView.snp.makeConstraints { make in
-            make.centerX.equalTo(view)
-            make.top.equalToSuperview().offset (100)
-            make.bottom.equalToSuperview() .offset(-100)
-        }
-    }
-    
-    private func drawBackgroundLayer() {
-        backgroundProgressLayer.path = UIBezierPath(
-            arcCenter: CGPoint(x: view.frame.midX, y: view.frame.midY),
-            radius: 150, startAngle: -90.degreesToRadians, endAngle: 270.degreesToRadians, clockwise: true
-        ).cgPath
-        backgroundProgressLayer.strokeColor = UIColor.lightGray.cgColor
-        backgroundProgressLayer.fillColor = UIColor.clear.cgColor
-        backgroundProgressLayer.lineWidth = 10
-        view.layer.addSublayer(backgroundProgressLayer)
-    }
-}

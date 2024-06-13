@@ -78,6 +78,14 @@ final class ViewController: UIViewController, CAAnimationDelegate {
         view.addSubview(stackView)
     }
     
+    private func setupLayout() {
+           stackView.snp.makeConstraints { make in
+               make.centerX.equalTo(view)
+               make.centerY.equalTo(view)
+           }
+       }
+    
+    
     
     @objc private func startPausePressed() {
            if isStarted {

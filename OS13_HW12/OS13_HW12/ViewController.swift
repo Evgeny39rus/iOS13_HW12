@@ -68,8 +68,17 @@ final class ViewController: UIViewController, CAAnimationDelegate {
         updateUI()
     }
     
+    private func setupStackView() {
+        stackView.addArrangedSubview(modeLabel)
+        stackView.addArrangedSubview(timeLabel)
+        stackView.addArrangedSubview(startPauseButton)
+    }
     
-
+    private func setupHierarchy() {
+        view.addSubview(stackView)
+    }
+    
+    
     @objc private func startPausePressed() {
            if isStarted {
                pauseTimer()

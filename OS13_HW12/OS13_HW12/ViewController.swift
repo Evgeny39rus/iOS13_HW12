@@ -147,7 +147,37 @@ final class ViewController: UIViewController, CAAnimationDelegate {
                 switchMode()
             }
         }
-        
+    
+    private func startTimer() {
+            isStarted = true
+            updateStartPauseButton()
+            
+            if !isAnimationStarted {
+                drawForegroundLayer()
+                startAnimation()
+            } else {
+                resumeAnimation()
+            }
+            
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerFired), userInfo: nil, repeats: true)
+        }
+    
+    private func pauseTimer() {
+        isStarted = false
+        updateStartPauseButton()
+        timer.invalidate()
+        pauseAnimation()
+    }
+    
+    @objc private func timerFired() {
+        if time > 0 {
+            time -= 1
+            updateUI()
+        } else {
+            timer.invalidate()
+            switchMode()
+        }
+    }
         private func switchMode() {
             isWorkTime.toggle()
             time = isWorkTime ? workTime : restTime
